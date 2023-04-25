@@ -8,13 +8,16 @@ public class CharacterController2D : MonoBehaviour
     public LayerMask whatIsGround; // capa para definir qué es considerado suelo
     public float minScreenX; // límite izquierdo de la pantalla
     private bool isGrounded; // verifica si el personaje está en el suelo
+    private bool isMoving;
     private Rigidbody2D rb; // componente Rigidbody2D del personaje
     public CameraFollow cameraScript;
     public float limitOffset;
+    public Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // obtener componente Rigidbody2D
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -27,6 +30,7 @@ public class CharacterController2D : MonoBehaviour
 
         // mover el personaje
         float move = Input.GetAxis("Horizontal");
+        isMoving = (move > 0)||(move < 0);
 
         // asegurarse de que el personaje no se mueva más allá del límite izquierdo de la pantalla
         if (transform.position.x < minScreenX && move < 0)
@@ -35,6 +39,11 @@ public class CharacterController2D : MonoBehaviour
         }
 
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
+
+        // establecer las animaciones
+        animator.SetBool("speed", isMoving);
+        animator.SetBool("isGrounded", isGrounded);
+
 
         // voltear el sprite del personaje si es necesario
         if (move < 0)

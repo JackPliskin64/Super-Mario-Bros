@@ -50,3 +50,6 @@ TagManager:
   - name: Objects
     uniqueID: 2537532681
     locked: 0
+  - name: Coins
+    uniqueID: 1627732631
+    locked: 0
