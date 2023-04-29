@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 130806933}
   - component: {fileID: 130806934}
   - component: {fileID: 130806935}
+  - component: {fileID: 130806936}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -785,6 +786,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &130806936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130806927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0451c0ab9ebcaa44b709c140ed06610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1759486881}
+  breakSound: {fileID: 8300000, guid: 282d1f38f1794bd4eaf681dded94962d, type: 3}
 --- !u!1 &259372034
 GameObject:
   m_ObjectHideFlags: 0
@@ -22272,8 +22287,8 @@ GameObject:
   - component: {fileID: 1759486883}
   - component: {fileID: 1759486882}
   m_Layer: 3
-  m_Name: Objects
-  m_TagString: Untagged
+  m_Name: Bricks
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
