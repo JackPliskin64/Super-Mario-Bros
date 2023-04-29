@@ -13,11 +13,13 @@ public class CharacterController2D : MonoBehaviour
     public CameraFollow cameraScript;
     public float limitOffset;
     public Animator animator;
+    private AudioSource jumpSound;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // obtener componente Rigidbody2D
         animator = GetComponent<Animator>();
+        jumpSound = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -62,6 +64,7 @@ public class CharacterController2D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(new Vector2(0, jumpForce));
+            jumpSound.Play();
         }
     }
 }
