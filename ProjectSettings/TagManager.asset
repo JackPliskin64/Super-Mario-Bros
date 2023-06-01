@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Brick
+  - Exams
+  - DeathZone
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,6 @@ TagManager:
   - name: Objects
     uniqueID: 2537532681
     locked: 0
-  - name: Coins
+  - name: Exams
     uniqueID: 1627732631
     locked: 0

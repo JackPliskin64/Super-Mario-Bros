@@ -13,13 +13,16 @@ public class CharacterController2D : MonoBehaviour
     public CameraFollow cameraScript;
     public float limitOffset;
     public Animator animator;
-    private AudioSource jumpSound;
+    private AudioSource audioSource;
+    public AudioClip jumpSound;
+    public GameManager gameManager;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // obtener componente Rigidbody2D
         animator = GetComponent<Animator>();
-        jumpSound = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void FixedUpdate()
@@ -31,31 +34,36 @@ public class CharacterController2D : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, whatIsGround);
 
         // mover el personaje
-        float move = Input.GetAxis("Horizontal");
-        isMoving = (move > 0)||(move < 0);
 
-        // asegurarse de que el personaje no se mueva más allá del límite izquierdo de la pantalla
-        if (transform.position.x < minScreenX && move < 0)
+        if (!gameManager.gameOver)
         {
-            move = 0f;
+            float move = Input.GetAxis("Horizontal");
+            isMoving = (move > 0) || (move < 0);
+
+            // asegurarse de que el personaje no se mueva más allá del límite izquierdo de la pantalla
+            if (transform.position.x < minScreenX && move < 0)
+            {
+                move = 0f;
+            }
+
+            rb.velocity = new Vector2(move * speed, rb.velocity.y);
+
+            // establecer las animaciones
+            animator.SetBool("speed", isMoving);
+            animator.SetBool("isGrounded", isGrounded);
+
+
+            // voltear el sprite del personaje si es necesario
+            if (move < 0)
+            {
+                transform.localScale = new Vector2(-1, 1);
+            }
+            else if (move > 0)
+            {
+                transform.localScale = new Vector2(1, 1);
+            }
         }
-
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
-
-        // establecer las animaciones
-        animator.SetBool("speed", isMoving);
-        animator.SetBool("isGrounded", isGrounded);
-
-
-        // voltear el sprite del personaje si es necesario
-        if (move < 0)
-        {
-            transform.localScale = new Vector2(-1, 1);
-        }
-        else if (move > 0)
-        {
-            transform.localScale = new Vector2(1, 1);
-        }
+        
     }
 
     private void Update()
@@ -64,7 +72,7 @@ public class CharacterController2D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(new Vector2(0, jumpForce));
-            jumpSound.Play();
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 }
