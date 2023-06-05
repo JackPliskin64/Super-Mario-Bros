@@ -57,5 +57,10 @@ public class Collisions : MonoBehaviour
         {
             gameManager.gameOver = true;
         }
+
+        if (collision.CompareTag("Finish"))
+        {
+            gameManager.win = true;
+        }
     }
 }

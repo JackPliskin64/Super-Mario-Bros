@@ -9,4 +9,8 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level01");
     }
+    public void LoadIntro()
+    {
+        SceneManager.LoadScene("Intro");
+    }
 }

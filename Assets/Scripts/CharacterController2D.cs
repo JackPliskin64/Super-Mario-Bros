@@ -35,7 +35,7 @@ public class CharacterController2D : MonoBehaviour
 
         // mover el personaje
 
-        if (!gameManager.gameOver)
+        if (!gameManager.gameOver && !gameManager.win)
         {
             float move = Input.GetAxis("Horizontal");
             isMoving = (move > 0) || (move < 0);
